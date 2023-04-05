@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="main_01">#FFFFFF</color>
-    <color name="main_02">#1789DB</color>
+    <color name="main_01">#1789DB</color>
+    <color name="main_02">#FFFFFF</color>
 
     <color name="text_01">#000000</color>
     <color name="text_02">#828282</color>
     <color name="text_03">#393737</color>
 
     <color name="ui_01">#1789DB</color>
-    <color name="ui_02">#949494</color>
-    <!--    <color name="ui_03">#EDEDEF</color>-->
-    <!--    <color name="ui_04">#E3E2E7</color>-->
-    <!--    <color name="ui_05">#C0BDCB</color>-->
-    <!--    <color name="links">#0075CD</color>-->
+    <color name="ui_02">#FFFFFF</color>
+    <color name="ui_03">#949494</color>
+    <color name="ui_04">#F57A7A</color>
 </resources>
