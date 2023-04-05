@@ -22,7 +22,7 @@ class BSDNameRequest(private val userName: String?, private val saveInterface: I
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (userName != "") {
+        if (userName != getString(R.string.anonymous)) {
             dismiss()
         }
     }

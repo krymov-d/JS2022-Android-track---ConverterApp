@@ -9,4 +9,5 @@
 
     <string name="name_request">Как Вам обращаться?</string>
     <string name="hint_name">Name</string>
+    <string name="anonymous">Anonymous</string>
 </resources>
