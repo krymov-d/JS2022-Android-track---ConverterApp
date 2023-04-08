@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/ic_chat_fragment_bg"
+        android:padding="16dp"
         app:layout_constraintBottom_toTopOf="@id/ll_message"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

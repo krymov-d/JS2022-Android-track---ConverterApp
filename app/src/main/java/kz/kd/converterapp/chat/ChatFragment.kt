@@ -86,7 +86,7 @@ class ChatFragment : Fragment(), UserNameRepository {
 
     private fun initRecycler() {
         chatAdapter = MessageAdapter(layoutInflater)
-        chatLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        chatLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true)
 
         rvChat.adapter = chatAdapter
         rvChat.layoutManager = chatLayoutManager
@@ -109,7 +109,6 @@ class ChatFragment : Fragment(), UserNameRepository {
 
         ibSend.setOnClickListener {
             writeNewMessage(messageId.toString(), etMessage.text.toString())
-            //messageId++
             etMessage.text.clear()
         }
     }
