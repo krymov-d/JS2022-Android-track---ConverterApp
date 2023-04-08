@@ -2,12 +2,12 @@ package kz.kd.converterapp.chat
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,47 +15,52 @@ import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import kz.kd.converterapp.R
 
-private const val KEY_NAME = "Name"
-private const val USER_MESSAGES = "UserMessages"
+private const val KEY_NAME = "ChatFragmentUserName"
+private const val USER_MESSAGES = "ChatFragmentUserMessages"
 
-class ChatFragment : Fragment(), IFSaveName {
+class ChatFragment : Fragment(), UserNameRepository {
 
     private lateinit var database: DatabaseReference
-
     private lateinit var preferences: SharedPreferences
-    private var userName: String? = null
 
     private lateinit var etMessage: EditText
     private lateinit var ibSend: ImageButton
     private lateinit var rvChat: RecyclerView
     private lateinit var chatAdapter: MessageAdapter
+    private lateinit var chatLayoutManager: LinearLayoutManager
 
+    private lateinit var userName: String
+    private lateinit var userNameAnonymous: String
     private var messageId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         initDatabase()
-        getSavedName()
-        initBSDNameRequest()
+        getUserNameFromSharedPreference()
+        initBSDUserNameRequest()
     }
 
     private fun initDatabase() {
         database = Firebase.database.reference
     }
 
-    private fun getSavedName() {
+    private fun getUserNameFromSharedPreference() {
         preferences =
             androidx.preference.PreferenceManager.getDefaultSharedPreferences(requireContext())
-        userName = preferences.getString(KEY_NAME, getString(R.string.anonymous))
+        userNameAnonymous = getString(R.string.anonymous)
+        userName = preferences.getString(KEY_NAME, userNameAnonymous) ?: userNameAnonymous //trick to keep the non-null type for userName variable
     }
 
-    private fun initBSDNameRequest() {
-        BSDNameRequest(userName, this).show(childFragmentManager, null)
+    private fun initBSDUserNameRequest() {
+        if (userName == userNameAnonymous) {
+            BSDUserNameRequest(this).show(childFragmentManager, null)
+        }
     }
 
 
@@ -70,17 +75,56 @@ class ChatFragment : Fragment(), IFSaveName {
         super.onViewCreated(view, savedInstanceState)
 
         initViews(view)
+        initRecycler()
         initChat()
-        initRecycler(view)
         requestDatabaseContent()
     }
 
     private fun initViews(view: View) {
-        etMessage = view.findViewById(R.id.et_message)
-        ibSend = view.findViewById(R.id.ib_send)
+        with(view) {
+            etMessage = findViewById(R.id.et_message)
+            ibSend = findViewById(R.id.ib_send)
+            rvChat = findViewById(R.id.rv_message)
+        }
+    }
+
+    private fun initRecycler() {
+        chatAdapter = MessageAdapter(layoutInflater)
+        chatLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
+        rvChat.adapter = chatAdapter
+        rvChat.layoutManager = chatLayoutManager
     }
 
     private fun initChat() {
+//        val keyList = mutableListOf<String?>()
+//        val valueEventListener = object : ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                Log.d(USER_MESSAGES, snapshot.toString())
+//                val mapOfMessages = snapshot.value as Map<String, String>
+//                val keysList = mapOfMessages.keys.toMutableList().map { it.toInt() }.sortedBy { it.toInt() }
+//                val sortedMapOfMessages = mapOfMessages.toSortedMap()
+//                Log.d(
+//                    USER_MESSAGES, sortedMapOfMessages.lastKey().toString())
+//                Log.d(
+//                    USER_MESSAGES, sortedMapOfMessages.toString())
+//                Log.d(
+//                    USER_MESSAGES, keysList.toString())
+//                if (snapshot.exists()) {
+//                    var i = 0
+//                    for (d in snapshot.children) {
+//                        keyList[i] = d.key
+//                        i++
+//                    }
+//                }
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                TODO("Not yet implemented")
+//            }
+//        }
+//        database.child(USER_MESSAGES).child(userName).addValueEventListener(valueEventListener)
+
         ibSend.setOnClickListener {
             writeNewMessage(messageId.toString(), etMessage.text.toString())
             messageId++
@@ -89,28 +133,36 @@ class ChatFragment : Fragment(), IFSaveName {
     }
 
     private fun writeNewMessage(id: String, messageText: String) {
-        val name = userName ?: ""
-        val letter = userName?.subSequence(0, 1).toString()
-        val message = Message(id, name, letter, messageText)
-        database.child(USER_MESSAGES).child(id).setValue(message)
-    }
-
-    private fun initRecycler(view: View) {
-        rvChat = view.findViewById(R.id.rv_message)
-        chatAdapter = MessageAdapter(layoutInflater)
-
-        rvChat.adapter = chatAdapter
-        rvChat.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        val message = Message(id, userName, userName[0].toString(), messageText)
+        //database.child(USER_MESSAGES).child(userName).child(id).setValue(message)
+        database.child(USER_MESSAGES).child(userName).setValue(message)
     }
 
     private fun requestDatabaseContent() {
+//        val messageListener = object : ValueEventListener{
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                for (messageSnapshot in snapshot.children) {
+//                    val message = messageSnapshot.getValue(Message::class.java)
+//                    chatAdapter.addNewMessage(message)
+//                }
+//
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                TODO("Not yet implemented")
+//            }
+//        }
+
         val messageListener = object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                Toast.makeText(context, "onChildAdded", Toast.LENGTH_SHORT).show()
+                Log.d(USER_MESSAGES, snapshot.toString())
+                val message = snapshot.getValue(Message::class.java)
+                chatAdapter.addNewMessage(message)
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                Toast.makeText(context, "onChildChanged", Toast.LENGTH_SHORT).show()
+                val message = snapshot.getValue(Message::class.java)
+                chatAdapter.addNewMessage(message)
             }
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
@@ -128,7 +180,8 @@ class ChatFragment : Fragment(), IFSaveName {
         database.child(USER_MESSAGES).addChildEventListener(messageListener)
     }
 
-    override fun saveName(name: String) {
+    override fun putUserNameToSharedPreference(name: String) {
+        userName = name
         preferences.edit().putString(KEY_NAME, name).apply()
     }
 }

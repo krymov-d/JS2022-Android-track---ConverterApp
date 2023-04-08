@@ -2,29 +2,40 @@ package kz.kd.converterapp.chat
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import kz.kd.converterapp.R
 
 class MessageAdapter(private val layoutInflater: LayoutInflater) :
-    ListAdapter<Message, MessageViewHolder>(DiffCallback()) {
+    RecyclerView.Adapter<MessageViewHolder>() {
+
+    private var messageList: MutableList<Message> = mutableListOf()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         val itemView = layoutInflater.inflate(R.layout.item_message, parent, false)
         return MessageViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
-        val message = getItem(position)
+        val message = messageList[position]
         holder.bind(message)
     }
-}
 
-private class DiffCallback : DiffUtil.ItemCallback<Message>() {
-    override fun areItemsTheSame(oldItem: Message, newItem: Message): Boolean {
-        return oldItem.id == newItem.id
+    override fun getItemCount(): Int {
+        return messageList.size
     }
 
-    override fun areContentsTheSame(oldItem: Message, newItem: Message): Boolean {
-        return oldItem == newItem
+//    fun setData(newData: List<Message>) {
+//        notifyItemRangeRemoved(0, messageList.size)
+//        messageList.clear()
+//        messageList.addAll(newData)
+//        notifyItemRangeInserted(0, messageList.size)
+//    }
+
+    fun addNewMessage(message: Message?) {
+        if (message == null) {
+            return
+        }
+        messageList.add(0, message)
+        notifyItemInserted(0)
     }
 }

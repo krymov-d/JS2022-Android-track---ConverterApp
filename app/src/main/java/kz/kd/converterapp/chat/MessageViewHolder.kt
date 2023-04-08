@@ -11,6 +11,6 @@ class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(message: Message) {
         customTVMessage.text = message.messageText
-        customTVFirstLetter.text = message.userNameLetter
+        customTVFirstLetter.text = message.messageLabel
     }
 }
