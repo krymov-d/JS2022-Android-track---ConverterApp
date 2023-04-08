@@ -7,25 +7,25 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="end"
+        android:gravity="start"
         app:layout_constraintBottom_toBottomOf="@id/custom_tv_letter"
-        app:layout_constraintEnd_toStartOf="@id/custom_tv_letter"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/custom_tv_letter"
         app:layout_constraintTop_toTopOf="@id/custom_tv_letter">
 
         <kz.kd.converterapp.chat.CustomTVMessage
             android:id="@+id/custom_tv_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
+            android:layout_marginStart="4dp"
             android:fontFamily="@font/montserrat"
             android:gravity="center_vertical"
             android:paddingHorizontal="12dp"
             android:paddingVertical="4dp"
             android:textColor="@color/text_03"
             android:textSize="16sp"
-            app:defaultUser="true" />
+            app:defaultUser="false" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <kz.kd.converterapp.chat.CustomTVFirstLetter
@@ -39,10 +39,10 @@
         android:paddingVertical="4dp"
         android:textColor="@color/text_01"
         android:textSize="16sp"
-        app:defaultUser="true"
+        app:defaultUser="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="defaultUser" format="boolean" />
+
+    <declare-styleable name="CustomTVMessage">
+        <attr name="defaultUser" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomTVFirstLetter">
+        <attr name="defaultUser" />
+    </declare-styleable>
+
+</resources>
