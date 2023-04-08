@@ -85,7 +85,7 @@ class ChatFragment : Fragment(), UserNameRepository {
     }
 
     private fun initRecycler() {
-        chatAdapter = MessageAdapter(layoutInflater)
+        chatAdapter = MessageAdapter(layoutInflater, userName)
         chatLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true)
 
         rvChat.adapter = chatAdapter
