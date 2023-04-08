@@ -24,13 +24,6 @@ class MessageAdapter(private val layoutInflater: LayoutInflater) :
         return messageList.size
     }
 
-//    fun setData(newData: List<Message>) {
-//        notifyItemRangeRemoved(0, messageList.size)
-//        messageList.clear()
-//        messageList.addAll(newData)
-//        notifyItemRangeInserted(0, messageList.size)
-//    }
-
     fun addNewMessage(message: Message?) {
         if (message == null) {
             return
