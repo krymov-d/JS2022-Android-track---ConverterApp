@@ -3,6 +3,8 @@ package kz.kd.converterapp
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_ONE_SHOT
+import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationCompat
@@ -36,15 +38,15 @@ class FirebaseMessagingServiceInstance : FirebaseMessagingService() {
     }
 
     private fun getPendingIntent(): PendingIntent {
-        val intent = Intent(this, MainActivity::class.java).apply {
+        val mainActivityIntent = Intent(this, MainActivity::class.java).apply {
             this.putExtra(INTENT_DATA_NAME, OPEN_FRAGMENT_WITH_ID)
         }
-        return PendingIntent.getActivity(
-            this,
-            0,
-            intent,
-            PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
-        )
+        val splashScreenActivityIntent = Intent(this, CustomScreenActivity::class.java)
+
+        return TaskStackBuilder.create(this).apply {
+            addNextIntent(mainActivityIntent)
+            addNextIntent(splashScreenActivityIntent)
+        }.getPendingIntent(0, FLAG_ONE_SHOT)
     }
 
     private fun createNotificationChannel() {
