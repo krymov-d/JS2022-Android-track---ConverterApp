@@ -5,17 +5,16 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
-private const val CHANNEL_ID = "888"
+private const val CHANNEL_ID = "33"
+private const val OPEN_FRAGMENT_WITH_ID = R.id.favoritesFragment
 
 class FirebaseMessagingServiceInstance : FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
-        Log.d("Firebase", "OnMessageReceived")
         createNotificationChannel()
         displayNotification(message)
     }
@@ -36,12 +35,17 @@ class FirebaseMessagingServiceInstance : FirebaseMessagingService() {
 
     }
 
-    private fun getPendingIntent(): PendingIntent = PendingIntent.getActivity(
-        this,
-        0,
-        Intent(this, MainActivity::class.java),
-        PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
-    )
+    private fun getPendingIntent(): PendingIntent {
+        val intent = Intent(this, MainActivity::class.java).apply {
+            this.putExtra(INTENT_DATA_NAME, OPEN_FRAGMENT_WITH_ID)
+        }
+        return PendingIntent.getActivity(
+            this,
+            0,
+            intent,
+            PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
+        )
+    }
 
     private fun createNotificationChannel() {
         val name = "Homework 33"

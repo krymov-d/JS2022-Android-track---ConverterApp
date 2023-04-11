@@ -9,7 +9,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+const val INTENT_DATA_NAME = "Fragment"
+
 class MainActivity : AppCompatActivity() {
+
+    private val defaultFragment = R.id.chatFragment
 
     private lateinit var tbMain: Toolbar
     private lateinit var tbConfig: AppBarConfiguration
@@ -23,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         initViews()
         initNavigation()
+        onNotificationClicked()
     }
 
     private fun initViews() {
@@ -36,5 +41,12 @@ class MainActivity : AppCompatActivity() {
         tbConfig = AppBarConfiguration(navController.graph)
         tbMain.setupWithNavController(navController, tbConfig)
         bnvMain.setupWithNavController(navController)
+    }
+
+    private fun onNotificationClicked() {
+        val fragmentId = intent.getIntExtra(INTENT_DATA_NAME, defaultFragment)
+        if (fragmentId != defaultFragment) {
+            bnvMain.selectedItemId = fragmentId
+        }
     }
 }
