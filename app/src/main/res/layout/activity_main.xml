@@ -6,13 +6,117 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/pin_tv_code"
+        style="@style/style_pin_tv_code"
+        android:layout_marginBottom="32dp"
+        android:hint="@string/pin_hint"
+        app:layout_constraintBottom_toTopOf="@id/pin_btn_two"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_btn_one"
+        style="@style/style_pin_btn"
+        android:layout_marginEnd="24dp"
+        android:text="@string/pin_one"
+        app:layout_constraintEnd_toStartOf="@id/pin_btn_two"
+        app:layout_constraintTop_toTopOf="@id/pin_btn_two" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_btn_two"
+        style="@style/style_pin_btn"
+        android:layout_marginBottom="24dp"
+        android:text="@string/pin_two"
+        app:layout_constraintBottom_toTopOf="@id/pin_btn_five"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_btn_three"
+        style="@style/style_pin_btn"
+        android:layout_marginStart="24dp"
+        android:text="@string/pin_three"
+        app:layout_constraintStart_toEndOf="@id/pin_btn_two"
+        app:layout_constraintTop_toTopOf="@id/pin_btn_two" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_btn_four"
+        style="@style/style_pin_btn"
+        android:layout_marginEnd="24dp"
+        android:text="@string/pin_four"
+        app:layout_constraintEnd_toStartOf="@id/pin_btn_five"
+        app:layout_constraintTop_toTopOf="@id/pin_btn_five" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_btn_five"
+        style="@style/style_pin_btn"
+        android:text="@string/pin_five"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_btn_six"
+        style="@style/style_pin_btn"
+        android:layout_marginStart="24dp"
+        android:text="@string/pin_six"
+        app:layout_constraintStart_toEndOf="@id/pin_btn_five"
+        app:layout_constraintTop_toTopOf="@id/pin_btn_five" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_btn_seven"
+        style="@style/style_pin_btn"
+        android:layout_marginEnd="24dp"
+        android:text="@string/pin_seven"
+        app:layout_constraintEnd_toStartOf="@id/pin_btn_eight"
+        app:layout_constraintTop_toTopOf="@id/pin_btn_eight" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_btn_eight"
+        style="@style/style_pin_btn"
+        android:layout_marginTop="24dp"
+        android:text="@string/pin_eight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pin_btn_five" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_btn_nine"
+        style="@style/style_pin_btn"
+        android:layout_marginStart="24dp"
+        android:text="@string/pin_nine"
+        app:layout_constraintStart_toEndOf="@id/pin_btn_eight"
+        app:layout_constraintTop_toTopOf="@id/pin_btn_eight" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_btn_clear"
+        style="@style/style_pin_btn"
+        android:layout_marginEnd="24dp"
+        android:text="@string/pin_clear"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/pin_btn_zero"
+        app:layout_constraintTop_toTopOf="@id/pin_btn_zero" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_btn_zero"
+        style="@style/style_pin_btn"
+        android:layout_marginTop="24dp"
+        android:text="@string/pin_zero"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pin_btn_eight" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/pin_btn_ok"
+        style="@style/style_pin_btn"
+        android:layout_marginStart="24dp"
+        android:text="@string/pin_ok"
+        app:layout_constraintStart_toEndOf="@id/pin_btn_zero"
+        app:layout_constraintTop_toTopOf="@id/pin_btn_zero" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

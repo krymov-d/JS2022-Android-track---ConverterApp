@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="style_pin_tv_code">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/main_01</item>
+        <item name="android:layout_width">320dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:textColorHint">@color/text_02</item>
+        <item name="android:gravity">center_horizontal|center_vertical</item>
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:maxLength">4</item>
+    </style>
+
+    <style name="style_pin_btn">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/main_01</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:background">@drawable/pin_btn_bg_default</item>
+        <item name="backgroundTint">@null</item>
+        <item name="android:lineSpacingExtra">-1sp</item>
+        <item name="fontFamily">@font/montserrat_medium</item>
+    </style>
+</resources>

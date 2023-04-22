@@ -1,4 +1,21 @@
 <resources>
     <string name="app_name">Converter App</string>
     <string name="app_name_short">Converter</string>
+
+    <string name="pin_hint">Введите код</string>
+    <string name="pin_one">1</string>
+    <string name="pin_two">2</string>
+    <string name="pin_three">3</string>
+    <string name="pin_four">4</string>
+    <string name="pin_five">5</string>
+    <string name="pin_six">6</string>
+    <string name="pin_seven">7</string>
+    <string name="pin_eight">8</string>
+    <string name="pin_nine">9</string>
+    <string name="pin_zero">0</string>
+    <string name="pin_clear">&#60;</string>
+    <string name="pin_ok">OK</string>
+    <string name="pin_correct">Correct PIN!</string>
+    <string name="pin_wrong">Wrong PIN!</string>
+    <string name="pin_empty">Empty PIN!</string>
 </resources>
