@@ -1,10 +1,13 @@
 package kz.kd.converterapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+
+private const val KEY_PIN_CODE = "PinCode"
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,8 +35,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initViews()
+        restorePinCode(savedInstanceState)
         initClickListeners()
         initCodeVerifier()
+    }
+
+    private fun restorePinCode(savedInstanceState: Bundle?) {
+        if (savedInstanceState == null) {
+            return
+        }
+        pinCode = savedInstanceState.getString(KEY_PIN_CODE, pinCode)
+        tvCode.text = pinCode
     }
 
     private fun initViews() {
@@ -79,9 +91,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun initCodeVerifier() {
         btnOk.setOnClickListener {
-            if (pinCode == "1567") {
+            if (pinCode == CORRECT_PIN_CODE) {
                 Toast.makeText(this, R.string.pin_correct, Toast.LENGTH_SHORT).show()
+                Intent(this, SecondActivity::class.java).apply {
+                    startActivity(this)
+                }
             }
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(KEY_PIN_CODE, tvCode.text.toString())
     }
 }
