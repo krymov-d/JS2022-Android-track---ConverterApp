@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 private const val KEY_PIN_CODE = "PinCode"
@@ -92,7 +91,7 @@ class MainActivity : AppCompatActivity() {
     private fun initCodeVerifier() {
         btnOk.setOnClickListener {
             if (pinCode == CORRECT_PIN_CODE) {
-                Toast.makeText(this, R.string.pin_correct, Toast.LENGTH_SHORT).show()
+                showToast(R.string.pin_correct)
                 Intent(this, SecondActivity::class.java).apply {
                     startActivity(this)
                 }

@@ -18,4 +18,10 @@
     <string name="pin_correct">Correct PIN!</string>
     <string name="pin_wrong">Wrong PIN!</string>
     <string name="pin_empty">Empty PIN!</string>
+
+    <string name="profile_tv_contacts">Anakin Skywalker\ndarthvader@emprire.sw</string>
+    <string name="profile_btn_share">Поделиться</string>
+    <string name="profile_btn_send">Отправить по почте</string>
+    <string name="profile_btn_call">Позвонить</string>
+    <string name="profile_btn_camera">Запустить камеру</string>
 </resources>
