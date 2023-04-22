@@ -24,4 +24,14 @@
     <string name="profile_btn_send">Отправить по почте</string>
     <string name="profile_btn_call">Позвонить</string>
     <string name="profile_btn_camera">Запустить камеру</string>
+
+    <string name="news_btn_backward">Backward</string>
+    <string name="news_btn_forward">Forward</string>
+    <string name="news_tv_heading_one">Technology</string>
+    <string name="news_tv_heading_two">Software</string>
+    <string name="news_tv_heading_three">Hardware</string>
+    <string name="news_tv_heading_four">Virtual Reality</string>
+    <string name="news_tv_heading_five">Neural Network</string>
+    <string name="news_tv_heading_six">Development</string>
+
 </resources>

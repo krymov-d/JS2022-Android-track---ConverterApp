@@ -95,6 +95,10 @@ class MainActivity : AppCompatActivity() {
                 Intent(this, SecondActivity::class.java).apply {
                     startActivity(this)
                 }
+            } else {
+                Intent(this, ThirdActivity::class.java).apply {
+                    startActivity(this)
+                }
             }
         }
     }
