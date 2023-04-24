@@ -1,4 +1,4 @@
-package kz.kd.converterapp
+package kz.kd.converterapp.presentation.account
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import kz.kd.converterapp.R
+import kz.kd.converterapp.startCamera
+import kz.kd.converterapp.startEmail
+import kz.kd.converterapp.startPhoneCall
+import kz.kd.converterapp.startWebsite
 
 class AccountFragment : Fragment() {
 

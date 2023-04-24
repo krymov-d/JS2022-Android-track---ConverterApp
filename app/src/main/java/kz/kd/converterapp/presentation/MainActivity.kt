@@ -1,10 +1,13 @@
-package kz.kd.converterapp
+package kz.kd.converterapp.presentation
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import kz.kd.converterapp.CORRECT_PIN_CODE
+import kz.kd.converterapp.R
+import kz.kd.converterapp.showToast
 
 private const val KEY_PIN_CODE = "PinCode"
 

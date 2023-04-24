@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/chatFragment"
-        android:name="kz.kd.converterapp.ChatFragment"
+        android:name="kz.kd.converterapp.presentation.chat.ChatFragment"
         android:label="@string/chat"
         tools:layout="@layout/fragment_chat" />
     <fragment
         android:id="@+id/favoritesFragment"
-        android:name="kz.kd.converterapp.FavoritesFragment"
+        android:name="kz.kd.converterapp.presentation.favorites.FavoritesFragment"
         android:label="@string/favorites"
         tools:layout="@layout/fragment_favorites" />
     <fragment
         android:id="@+id/converterFragment"
-        android:name="kz.kd.converterapp.ConverterFragment"
+        android:name="kz.kd.converterapp.presentation.converter.ConverterFragment"
         android:label="@string/converter"
         tools:layout="@layout/fragment_converter" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="kz.kd.converterapp.SearchFragment"
+        android:name="kz.kd.converterapp.presentation.search.SearchFragment"
         android:label="@string/search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/accountFragment"
-        android:name="kz.kd.converterapp.AccountFragment"
+        android:name="kz.kd.converterapp.presentation.account.AccountFragment"
         android:label="@string/account"
         tools:layout="@layout/fragment_account" />
 </navigation>

@@ -1,4 +1,4 @@
-package kz.kd.converterapp
+package kz.kd.converterapp.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kz.kd.converterapp.R
 
 class SecondActivity : AppCompatActivity() {
 
