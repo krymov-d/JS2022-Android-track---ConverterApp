@@ -19,6 +19,12 @@
     <string name="pin_wrong">Wrong PIN!</string>
     <string name="pin_empty">Empty PIN!</string>
 
+    <string name="chat">Chat</string>
+    <string name="favorites">Favorites</string>
+    <string name="converter">Converter</string>
+    <string name="search">Search</string>
+    <string name="account">Account</string>
+
     <string name="profile_tv_contacts">Anakin Skywalker\ndarthvader@emprire.sw</string>
     <string name="profile_btn_share">Поделиться</string>
     <string name="profile_btn_send">Отправить по почте</string>

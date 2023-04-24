@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/chatFragment"
+        android:icon="@drawable/iv_chat_menu_icon"
+        android:title="@string/chat"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/favoritesFragment"
+        android:icon="@drawable/iv_favorites_menu_icon"
+        android:title="@string/favorites"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/converterFragment"
+        android:icon="@drawable/iv_converter_menu_icon"
+        android:title="@string/converter"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/searchFragment"
+        android:icon="@drawable/iv_search_menu_icon"
+        android:title="@string/search"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/accountFragment"
+        android:icon="@drawable/iv_account_menu_icon"
+        android:title="@string/account"
+        app:showAsAction="ifRoom" />
+</menu>
