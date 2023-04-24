@@ -1,11 +1,14 @@
 package kz.kd.converterapp
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 
 class HeadingsFragment : Fragment(R.layout.fragment_headings) {
+
+    private val newsContainerID = R.id.news_fl_content
 
     private val headingsList = mutableListOf<TextView>()
     private val newsList = mutableListOf<News>()
@@ -24,6 +27,8 @@ class HeadingsFragment : Fragment(R.layout.fragment_headings) {
     private lateinit var newsFive: News
     private lateinit var newsSix: News
 
+    private var newsID = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -33,37 +38,37 @@ class HeadingsFragment : Fragment(R.layout.fragment_headings) {
 
     private fun initNews() {
         newsOne = News(
-            id = 1,
+            id = getString(R.string.news_id_one),
             author = getString(R.string.news_tv_author_one),
             name = getString(R.string.news_tv_heading_one),
             body = getString(R.string.news_tv_content_one)
         )
         newsTwo = News(
-            id = 1,
+            id = getString(R.string.news_id_two),
             author = getString(R.string.news_tv_author_two),
             name = getString(R.string.news_tv_heading_two),
             body = getString(R.string.news_tv_content_two)
         )
         newsThree = News(
-            id = 1,
+            id = getString(R.string.news_id_three),
             author = getString(R.string.news_tv_author_three),
             name = getString(R.string.news_tv_heading_three),
             body = getString(R.string.news_tv_content_three)
         )
         newsFour = News(
-            id = 1,
+            id = getString(R.string.news_id_four),
             author = getString(R.string.news_tv_author_four),
             name = getString(R.string.news_tv_heading_four),
             body = getString(R.string.news_tv_content_four)
         )
         newsFive = News(
-            id = 1,
+            id = getString(R.string.news_id_five),
             author = getString(R.string.news_tv_author_five),
             name = getString(R.string.news_tv_heading_five),
             body = getString(R.string.news_tv_content_five)
         )
         newsSix = News(
-            id = 1,
+            id = getString(R.string.news_id_six),
             author = getString(R.string.news_tv_author_six),
             name = getString(R.string.news_tv_heading_six),
             body = getString(R.string.news_tv_content_six)
@@ -118,12 +123,45 @@ class HeadingsFragment : Fragment(R.layout.fragment_headings) {
 
     private fun initTransaction() {
         for (i in 0..5) {
-            headingsList[i].setOnClickListener {
-                parentFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.news_fl_content, ContentFragment.newInstance(newsList[i]))
-                    .addToBackStack(null).commit()
-            }
+            initClickListener(i)
+        }
+    }
+
+    private fun initClickListener(i: Int) {
+        headingsList[i].setOnClickListener {
+            parentFragmentManager
+                .beginTransaction()
+                .replace(newsContainerID, ContentFragment.newInstance(newsList[i]), newsList[i].id)
+                .addToBackStack(null)
+                .commit()
+
+            initHeadingIndicator(i)
+        }
+    }
+
+    private fun initHeadingIndicator(i: Int) {
+        if (parentFragmentManager.findFragmentByTag(newsList[i].id)?.isAdded == true) {
+            headingsList[i].setTypeface(headingsList[i].typeface, Typeface.BOLD)
+        } else {
+            headingsList[i].setTypeface(headingsList[i].typeface, Typeface.NORMAL)
+        }
+    }
+
+    fun showSucceedingNews() {
+        parentFragmentManager
+            .beginTransaction()
+            .replace(
+                newsContainerID,
+                ContentFragment.newInstance(newsList[newsID]),
+                newsList[newsID].id
+            )
+            .addToBackStack(null)
+            .commit()
+
+        if (newsID == newsList.size - 1) {
+            newsID = 0
+        } else {
+            newsID++
         }
     }
 }

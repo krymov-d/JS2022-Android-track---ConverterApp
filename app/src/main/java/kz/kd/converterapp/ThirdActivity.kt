@@ -3,6 +3,9 @@ package kz.kd.converterapp
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+
+private const val HEADINGS_FRAGMENT_TAG = "HEADINGS_FRAGMENT_TAG"
 
 class ThirdActivity : AppCompatActivity() {
 
@@ -14,6 +17,7 @@ class ThirdActivity : AppCompatActivity() {
         setContentView(R.layout.activity_third)
 
         initViews()
+        initClickListeners()
         initHeadings()
     }
 
@@ -22,10 +26,23 @@ class ThirdActivity : AppCompatActivity() {
         btnForward = findViewById(R.id.news_btn_forward)
     }
 
+    private fun initClickListeners() {
+        btnBackward.setOnClickListener {
+            supportFragmentManager.popBackStack()
+        }
+
+        btnForward.setOnClickListener {
+            val fragment: Fragment? = supportFragmentManager.findFragmentById(R.id.news_fl_headings)
+            if (fragment is HeadingsFragment) {
+                fragment.showSucceedingNews()
+            }
+        }
+    }
+
     private fun initHeadings() {
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.news_fl_headings, HeadingsFragment())
+            .add(R.id.news_fl_headings, HeadingsFragment(), HEADINGS_FRAGMENT_TAG)
             .commit()
     }
 }

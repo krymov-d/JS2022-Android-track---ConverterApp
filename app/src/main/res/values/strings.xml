@@ -28,6 +28,13 @@
     <string name="news_btn_backward">Backward</string>
     <string name="news_btn_forward">Forward</string>
 
+    <string name="news_id_one">One</string>
+    <string name="news_id_two">Two</string>
+    <string name="news_id_three">Three</string>
+    <string name="news_id_four">Four</string>
+    <string name="news_id_five">Five</string>
+    <string name="news_id_six">Six</string>
+
     <string name="news_tv_author_one">Author One</string>
     <string name="news_tv_author_two">Author Two</string>
     <string name="news_tv_author_three">Author Three</string>
