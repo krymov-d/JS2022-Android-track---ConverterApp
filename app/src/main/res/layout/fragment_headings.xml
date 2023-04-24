@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/news_ll_headings"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,30 +10,30 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/news_tv_heading_one"
         style="@style/style_news_tv_heading"
-        android:text="@string/news_tv_heading_one" />
+        tools:text="@string/news_tv_heading_one" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/news_tv_heading_two"
         style="@style/style_news_tv_heading"
-        android:text="@string/news_tv_heading_two" />
+        tools:text="@string/news_tv_heading_two" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/news_tv_heading_three"
         style="@style/style_news_tv_heading"
-        android:text="@string/news_tv_heading_three" />
+        tools:text="@string/news_tv_heading_three" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/news_tv_heading_four"
         style="@style/style_news_tv_heading"
-        android:text="@string/news_tv_heading_four" />
+        tools:text="@string/news_tv_heading_four" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/news_tv_heading_five"
         style="@style/style_news_tv_heading"
-        android:text="@string/news_tv_heading_five" />
+        tools:text="@string/news_tv_heading_five" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/news_tv_heading_six"
         style="@style/style_news_tv_heading"
-        android:text="@string/news_tv_heading_six" />
+        tools:text="@string/news_tv_heading_six" />
 </androidx.appcompat.widget.LinearLayoutCompat>

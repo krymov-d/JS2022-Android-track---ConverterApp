@@ -27,11 +27,26 @@
 
     <string name="news_btn_backward">Backward</string>
     <string name="news_btn_forward">Forward</string>
+
+    <string name="news_tv_author_one">Author One</string>
+    <string name="news_tv_author_two">Author Two</string>
+    <string name="news_tv_author_three">Author Three</string>
+    <string name="news_tv_author_four">Author Four</string>
+    <string name="news_tv_author_five">Author Five</string>
+    <string name="news_tv_author_six">Author Six</string>
+
     <string name="news_tv_heading_one">Technology</string>
     <string name="news_tv_heading_two">Software</string>
     <string name="news_tv_heading_three">Hardware</string>
     <string name="news_tv_heading_four">Virtual Reality</string>
     <string name="news_tv_heading_five">Neural Network</string>
     <string name="news_tv_heading_six">Development</string>
+
+    <string name="news_tv_content_one">Android is a mobile operating system based on a modified version of the Linux kernel and other open-source software, designed primarily for touchscreen mobile devices such as smartphones and tablets.</string>
+    <string name="news_tv_content_two">Android is developed by a consortium of developers known as the Open Handset Alliance and commercially sponsored by Google.</string>
+    <string name="news_tv_content_three">It was unveiled in November 2007, with the first commercial Android device, the HTC Dream, being launched in September 2008.</string>
+    <string name="news_tv_content_four">Most versions of Android are proprietary. The core components are taken from the Android Open Source Project (AOSP), which is free and open-source software (FOSS) primarily licensed under the Apache License.</string>
+    <string name="news_tv_content_five">When Android is installed on devices, the ability to modify the otherwise free and open-source software is usually restricted, either by not providing the corresponding source code or by preventing re-installation through technical measures, thus rendering the installed version proprietary.</string>
+    <string name="news_tv_content_six">Most Android devices ship with additional proprietary software pre-installed,[4] most notably Google Mobile Services (GMS)[5] which includes core apps such as Google Chrome, the digital distribution platform Google Play, and the associated Google Play Services development platform.</string>
 
 </resources>
