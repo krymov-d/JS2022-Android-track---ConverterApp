@@ -11,8 +11,11 @@ import kz.kd.converterapp.startCamera
 import kz.kd.converterapp.startEmail
 import kz.kd.converterapp.startPhoneCall
 import kz.kd.converterapp.startWebsite
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AccountFragment : Fragment() {
+
+    private val accountViewModel: AccountViewModel by viewModel()
 
     private lateinit var btnShare: Button
     private lateinit var btnSend: Button

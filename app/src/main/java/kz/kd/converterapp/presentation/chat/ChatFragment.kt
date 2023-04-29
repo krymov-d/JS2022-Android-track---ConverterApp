@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kz.kd.converterapp.R
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ChatFragment : Fragment() {
+
+    private val chatViewModel: ChatViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
