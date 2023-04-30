@@ -16,7 +16,7 @@ class SearchFragment : Fragment() {
     private val searchViewModel: SearchViewModel by viewModel()
 
     private lateinit var rvTransactions: RecyclerView
-    private lateinit var transactionsAdapter: SearchAdapter
+    private lateinit var transactionsAdapter: TransactionAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +37,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        transactionsAdapter = SearchAdapter(layoutInflater)
+        transactionsAdapter = TransactionAdapter(layoutInflater)
     }
 
     private fun initRecycler() {

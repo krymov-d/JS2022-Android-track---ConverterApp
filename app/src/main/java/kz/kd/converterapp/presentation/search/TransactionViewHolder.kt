@@ -4,13 +4,14 @@ import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kz.kd.converterapp.R
+import kz.kd.converterapp.domain.models.TransactionHistory
 
-class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class TransactionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val tvAmount: TextView = itemView.findViewById(R.id.item_transaction_tv_amount)
     private val tvCurrency: TextView = itemView.findViewById(R.id.item_transaction_tv_currency)
 
-    fun bind(tc: TemporaryClass) {
-        tvAmount.text = tc.amount
-        tvCurrency.text = tc.currency
+    fun bind(transaction: TransactionHistory) {
+        tvAmount.text = transaction.amount
+        tvCurrency.text = transaction.currency
     }
 }
