@@ -30,4 +30,6 @@
     <string name="profile_btn_send">Отправить по почте</string>
     <string name="profile_btn_call">Позвонить</string>
     <string name="profile_btn_camera">Запустить камеру</string>
+
+    <string name="converter_add">Добавить</string>
 </resources>

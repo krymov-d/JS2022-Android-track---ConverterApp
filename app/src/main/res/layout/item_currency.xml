@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/item_currency_etl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        app:boxBackgroundColor="@color/main_02"
+        app:boxBackgroundMode="outline"
+        app:boxCornerRadiusBottomEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusTopStart="8dp"
+        app:boxStrokeColor="@color/main_01"
+        app:boxStrokeWidthFocused="1dp"
+        app:hintTextColor="@color/main_01"
+        app:layout_constraintBottom_toBottomOf="@id/item_currency_cv_flag"
+        app:layout_constraintEnd_toStartOf="@id/item_currency_cv_flag"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/item_currency_cv_flag"
+        app:layout_constraintVertical_bias="1">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/item_currency_et_amount"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:fontFamily="@font/montserrat_light"
+            android:inputType="numberSigned"
+            tools:hint="@string/converter" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/item_currency_cv_flag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/ui_01"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="8dp"
+        app:cardPreventCornerOverlap="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/item_currency_iv_flag"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:scaleType="centerInside"
+            tools:src="@drawable/ic_anakin_skywalker" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/item_currency_tv_currency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/montserrat_light"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="-1sp"
+        android:textColor="@color/text_01"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_currency_cv_flag"
+        tools:text="@string/converter" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
