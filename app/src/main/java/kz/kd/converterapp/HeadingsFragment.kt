@@ -28,6 +28,7 @@ class HeadingsFragment : Fragment(R.layout.fragment_headings) {
     private lateinit var newsSix: News
 
     private var newsID = 0
+    private var selectedHeading: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -140,11 +141,22 @@ class HeadingsFragment : Fragment(R.layout.fragment_headings) {
     }
 
     private fun initHeadingIndicator(i: Int) {
-        if (parentFragmentManager.findFragmentByTag(newsList[i].id)?.isAdded == true) {
-            headingsList[i].setTypeface(headingsList[i].typeface, Typeface.BOLD)
-        } else {
-            headingsList[i].setTypeface(headingsList[i].typeface, Typeface.NORMAL)
-        }
+//        if (parentFragmentManager.findFragmentByTag(newsList[i].id)?.isAdded == true) {
+//            headingsList[i].setTypeface(headingsList[i].typeface, Typeface.BOLD)
+//        } else {
+//            headingsList[i].setTypeface(headingsList[i].typeface, Typeface.NORMAL)
+//        }
+        selectedHeading?.setTypeface(null, Typeface.NORMAL)
+        selectedHeading = headingsList[i]
+        selectedHeading?.setTypeface(selectedHeading?.typeface, Typeface.BOLD)
+
+//        headingsList.forEachIndexed { index, textView ->
+//            if (index == i) {
+//                textView.setTypeface(textView.typeface, Typeface.BOLD)
+//            } else {
+//                textView.setTypeface(textView.typeface, Typeface.NORMAL)
+//            }
+//        }
     }
 
     fun showSucceedingNews() {
