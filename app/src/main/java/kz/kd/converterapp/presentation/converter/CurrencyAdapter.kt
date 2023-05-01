@@ -29,4 +29,9 @@ class CurrencyAdapter(private val layoutInflater: LayoutInflater) :
         currencyList.addAll(newDataSet)
         notifyItemRangeChanged(0, newDataSet.size)
     }
+
+    fun addCurrency(newCurrency: Currency) {
+        currencyList.add(currencyList.size, newCurrency)
+        notifyItemInserted(currencyList.size)
+    }
 }

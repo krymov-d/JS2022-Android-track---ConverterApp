@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import kz.kd.converterapp.R
 import kz.kd.converterapp.domain.models.Currency
@@ -18,6 +20,10 @@ class ConverterFragment : Fragment() {
 
     private lateinit var rvConverter: RecyclerView
     private lateinit var currencyAdapter: CurrencyAdapter
+    private lateinit var currencyLayoutManager: LinearLayoutManager
+    private lateinit var currencyItemDecoration: SpaceItemDecoration
+    private lateinit var currencySmoothScroller: LinearSmoothScroller
+    private lateinit var btnAdd: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,29 +36,52 @@ class ConverterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initViews(view)
-        initAdapter()
+        initRecyclerProperties()
         initRecycler()
+        initButtonClickListener()
 
         createContent()
     }
 
     private fun initViews(view: View) {
-        rvConverter = view.findViewById(R.id.converter_rv)
+        with(view) {
+            rvConverter = findViewById(R.id.converter_rv)
+            btnAdd = findViewById(R.id.fragment_converter_btn_add)
+        }
     }
 
-    private fun initAdapter() {
+    private fun initRecyclerProperties() {
+        val currentContext = context ?: return
         currencyAdapter = CurrencyAdapter(layoutInflater = layoutInflater)
+        currencyLayoutManager = LinearLayoutManager(currentContext)
+        currencyItemDecoration = SpaceItemDecoration(verticalSpaceInDp = 4, horizontalSpaceInDp = 8)
+        currencySmoothScroller = object : LinearSmoothScroller(context) {
+            override fun getVerticalSnapPreference(): Int = SNAP_TO_START
+        }
     }
 
     private fun initRecycler() {
-        val currentContext = context ?: return
+        rvConverter.apply {
+            adapter = currencyAdapter
+            layoutManager = currencyLayoutManager
+            addItemDecoration(currencyItemDecoration)
+        }
+    }
 
-        rvConverter.adapter = currencyAdapter
-        rvConverter.layoutManager = LinearLayoutManager(currentContext)
+    private fun initButtonClickListener() {
+        btnAdd.setOnClickListener {
+            val item = Currency(
+                id = 99,
+                amount = 99999.99999,
+                countryFlag = R.drawable.ic_anakin_skywalker,
+                countryName = "Kazakhstan",
+                currencyName = "KZT"
+            )
 
-        val spaceItemDecoration =
-            SpaceItemDecoration(verticalSpaceInDp = 4, horizontalSpaceInDp = 8)
-        rvConverter.addItemDecoration(spaceItemDecoration)
+            currencyAdapter.addCurrency(item)
+            currencySmoothScroller.targetPosition = currencyAdapter.itemCount
+            currencyLayoutManager.startSmoothScroll(currencySmoothScroller)
+        }
     }
 
     private fun createContent() {
