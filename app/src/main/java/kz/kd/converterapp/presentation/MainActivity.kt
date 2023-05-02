@@ -89,6 +89,12 @@ class MainActivity : AppCompatActivity() {
                 tvCode.text = pinCode
             }
         }
+
+        btnClear.setOnLongClickListener {
+            pinCode = ""
+            tvCode.text = pinCode
+            true
+        }
     }
 
     private fun initCodeVerifier() {
