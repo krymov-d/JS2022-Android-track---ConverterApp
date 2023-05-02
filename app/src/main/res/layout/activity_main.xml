@@ -19,7 +19,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/pin_btn_one"
-        style="@style/style_pin_btn"
+        style="@style/style_pin_btn_digit"
         android:layout_marginEnd="24dp"
         android:text="@string/pin_one"
         app:layout_constraintEnd_toStartOf="@id/pin_btn_two"
@@ -27,7 +27,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/pin_btn_two"
-        style="@style/style_pin_btn"
+        style="@style/style_pin_btn_digit"
         android:layout_marginBottom="24dp"
         android:text="@string/pin_two"
         app:layout_constraintBottom_toTopOf="@id/pin_btn_five"
@@ -36,7 +36,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/pin_btn_three"
-        style="@style/style_pin_btn"
+        style="@style/style_pin_btn_digit"
         android:layout_marginStart="24dp"
         android:text="@string/pin_three"
         app:layout_constraintStart_toEndOf="@id/pin_btn_two"
@@ -44,7 +44,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/pin_btn_four"
-        style="@style/style_pin_btn"
+        style="@style/style_pin_btn_digit"
         android:layout_marginEnd="24dp"
         android:text="@string/pin_four"
         app:layout_constraintEnd_toStartOf="@id/pin_btn_five"
@@ -52,7 +52,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/pin_btn_five"
-        style="@style/style_pin_btn"
+        style="@style/style_pin_btn_digit"
         android:text="@string/pin_five"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +61,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/pin_btn_six"
-        style="@style/style_pin_btn"
+        style="@style/style_pin_btn_digit"
         android:layout_marginStart="24dp"
         android:text="@string/pin_six"
         app:layout_constraintStart_toEndOf="@id/pin_btn_five"
@@ -70,7 +70,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/pin_btn_seven"
-        style="@style/style_pin_btn"
+        style="@style/style_pin_btn_digit"
         android:layout_marginEnd="24dp"
         android:text="@string/pin_seven"
         app:layout_constraintEnd_toStartOf="@id/pin_btn_eight"
@@ -78,7 +78,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/pin_btn_eight"
-        style="@style/style_pin_btn"
+        style="@style/style_pin_btn_digit"
         android:layout_marginTop="24dp"
         android:text="@string/pin_eight"
         app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +87,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/pin_btn_nine"
-        style="@style/style_pin_btn"
+        style="@style/style_pin_btn_digit"
         android:layout_marginStart="24dp"
         android:text="@string/pin_nine"
         app:layout_constraintStart_toEndOf="@id/pin_btn_eight"
@@ -95,7 +95,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/pin_btn_clear"
-        style="@style/style_pin_btn"
+        style="@style/style_pin_btn_util"
         android:layout_marginEnd="24dp"
         android:text="@string/pin_clear"
         android:textStyle="bold"
@@ -104,7 +104,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/pin_btn_zero"
-        style="@style/style_pin_btn"
+        style="@style/style_pin_btn_digit"
         android:layout_marginTop="24dp"
         android:text="@string/pin_zero"
         app:layout_constraintEnd_toEndOf="parent"
@@ -113,7 +113,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/pin_btn_ok"
-        style="@style/style_pin_btn"
+        style="@style/style_pin_btn_util"
         android:layout_marginStart="24dp"
         android:text="@string/pin_ok"
         app:layout_constraintStart_toEndOf="@id/pin_btn_zero"

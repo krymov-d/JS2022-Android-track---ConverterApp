@@ -12,4 +12,10 @@
     <color name="ui_02">#949494</color>
     <color name="ui_03">#1A1789DB</color>
     <color name="ui_04">#0D000000</color>
+
+    <color name="btn_01">#17DB5A</color>
+    <color name="btn_02">#00FE25</color>
+    <color name="btn_03">#1A773A</color>
+    <color name="btn_04">#E17171</color>
+    <color name="btn_05">#E80A0A</color>
 </resources>
