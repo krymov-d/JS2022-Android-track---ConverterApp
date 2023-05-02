@@ -32,6 +32,18 @@ class CurrencyAdapter(private val layoutInflater: LayoutInflater) :
 
     fun addCurrency(newCurrency: Currency) {
         currencyList.add(currencyList.size, newCurrency)
-        notifyItemInserted(currencyList.size)
+        notifyItemRangeChanged(0, currencyList.size)
+    }
+
+    fun moveCurrency(startPosition: Int, endPosition: Int) {
+        val temporaryCurrency: Currency = currencyList[endPosition]
+        currencyList[endPosition] = currencyList[startPosition]
+        currencyList[startPosition] = temporaryCurrency
+        notifyItemMoved(startPosition, endPosition)
+    }
+
+    fun deleteCurrency(position: Int) {
+        currencyList.removeAt(position)
+        notifyItemRemoved(position)
     }
 }

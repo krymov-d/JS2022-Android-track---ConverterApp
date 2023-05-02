@@ -1,11 +1,17 @@
 package kz.kd.converterapp.presentation.converter
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.ItemTouchHelper.DOWN
+import androidx.recyclerview.widget.ItemTouchHelper.END
+import androidx.recyclerview.widget.ItemTouchHelper.START
+import androidx.recyclerview.widget.ItemTouchHelper.UP
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +29,8 @@ class ConverterFragment : Fragment() {
     private lateinit var currencyLayoutManager: LinearLayoutManager
     private lateinit var currencyItemDecoration: SpaceItemDecoration
     private lateinit var currencySmoothScroller: LinearSmoothScroller
+    private lateinit var currencyItemTouchHelperCallback: ItemTouchHelper.SimpleCallback
+    private lateinit var currencyItemTouchHelper: ItemTouchHelper
     private lateinit var btnAdd: Button
 
     override fun onCreateView(
@@ -52,12 +60,48 @@ class ConverterFragment : Fragment() {
 
     private fun initRecyclerProperties() {
         val currentContext = context ?: return
+        initAdapter()
+        initLayoutManager(currentContext)
+        initItemDecoration()
+        initSmoothScroller()
+        initItemTouchHelper()
+    }
+
+    private fun initAdapter() {
         currencyAdapter = CurrencyAdapter(layoutInflater = layoutInflater)
-        currencyLayoutManager = LinearLayoutManager(currentContext)
+    }
+
+    private fun initLayoutManager(context: Context) {
+        currencyLayoutManager = LinearLayoutManager(context)
+    }
+
+    private fun initItemDecoration() {
         currencyItemDecoration = SpaceItemDecoration(verticalSpaceInDp = 4, horizontalSpaceInDp = 8)
+    }
+
+    private fun initSmoothScroller() {
         currencySmoothScroller = object : LinearSmoothScroller(context) {
             override fun getVerticalSnapPreference(): Int = SNAP_TO_START
         }
+    }
+
+    private fun initItemTouchHelper() {
+        currencyItemTouchHelperCallback =
+            object : ItemTouchHelper.SimpleCallback(UP or DOWN, START or END) {
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+                    currencyAdapter.moveCurrency(viewHolder.layoutPosition, target.layoutPosition)
+                    return true
+                }
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    currencyAdapter.deleteCurrency(viewHolder.layoutPosition)
+                }
+            }
+        currencyItemTouchHelper = ItemTouchHelper(currencyItemTouchHelperCallback)
     }
 
     private fun initRecycler() {
@@ -66,6 +110,7 @@ class ConverterFragment : Fragment() {
             layoutManager = currencyLayoutManager
             addItemDecoration(currencyItemDecoration)
         }
+        currencyItemTouchHelper.attachToRecyclerView(rvConverter)
     }
 
     private fun initButtonClickListener() {
