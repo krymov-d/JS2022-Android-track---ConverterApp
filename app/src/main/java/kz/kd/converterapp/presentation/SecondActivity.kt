@@ -23,6 +23,7 @@ class SecondActivity : AppCompatActivity() {
         setContentView(R.layout.activity_second)
 
         initViews()
+        initToolbar()
         initNavigation()
     }
 
@@ -30,6 +31,10 @@ class SecondActivity : AppCompatActivity() {
         tbMain = findViewById(R.id.tb_main)
         navHostFragment = supportFragmentManager.findFragmentById(R.id.fcv_main) as NavHostFragment
         bnvMain = findViewById(R.id.bnv_main)
+    }
+
+    private fun initToolbar() {
+        setSupportActionBar(tbMain)
     }
 
     private fun initNavigation() {

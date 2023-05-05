@@ -3,9 +3,15 @@ package kz.kd.converterapp.presentation.converter
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.DOWN
@@ -46,7 +52,8 @@ class ConverterFragment : Fragment() {
         initViews(view)
         initRecyclerProperties()
         initRecycler()
-        initButtonClickListener()
+        initBtnAddClickListener()
+        initMenu()
 
         createContent()
     }
@@ -113,7 +120,7 @@ class ConverterFragment : Fragment() {
         currencyItemTouchHelper.attachToRecyclerView(rvConverter)
     }
 
-    private fun initButtonClickListener() {
+    private fun initBtnAddClickListener() {
         btnAdd.setOnClickListener {
             val item = Currency(
                 id = 99,
@@ -127,6 +134,36 @@ class ConverterFragment : Fragment() {
             currencySmoothScroller.targetPosition = currencyAdapter.itemCount
             currencyLayoutManager.startSmoothScroll(currencySmoothScroller)
         }
+    }
+
+    private fun initMenu() {
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_fragment_converter, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.menu_sort_alphabetically -> {
+                        Toast.makeText(context, "Alpha", Toast.LENGTH_SHORT).show()
+                        true
+                    }
+
+                    R.id.menu_sort_numerically -> {
+                        Toast.makeText(context, "Num", Toast.LENGTH_SHORT).show()
+                        true
+                    }
+
+                    R.id.menu_reset -> {
+                        Toast.makeText(context, "Reset", Toast.LENGTH_SHORT).show()
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+        })
     }
 
     private fun createContent() {
