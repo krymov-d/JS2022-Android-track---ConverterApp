@@ -9,10 +9,10 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.DOWN
 import androidx.recyclerview.widget.ItemTouchHelper.END
@@ -144,26 +144,28 @@ class ConverterFragment : Fragment() {
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                menuItem.isChecked = !menuItem.isChecked
                 return when (menuItem.itemId) {
                     R.id.menu_sort_alphabetically -> {
-                        Toast.makeText(context, "Alpha", Toast.LENGTH_SHORT).show()
+                        currencyAdapter.sortCurrency(1)
                         true
                     }
 
                     R.id.menu_sort_numerically -> {
-                        Toast.makeText(context, "Num", Toast.LENGTH_SHORT).show()
+                        currencyAdapter.sortCurrency(2)
                         true
                     }
 
                     R.id.menu_reset -> {
-                        Toast.makeText(context, "Reset", Toast.LENGTH_SHORT).show()
+                        activity?.invalidateOptionsMenu()
+                        currencyAdapter.sortCurrency(0)
                         true
                     }
 
                     else -> false
                 }
             }
-        })
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
     private fun createContent() {

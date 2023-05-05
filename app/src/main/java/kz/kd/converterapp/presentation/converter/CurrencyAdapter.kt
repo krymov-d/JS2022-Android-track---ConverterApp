@@ -46,4 +46,21 @@ class CurrencyAdapter(private val layoutInflater: LayoutInflater) :
         currencyList.removeAt(position)
         notifyItemRemoved(position)
     }
+
+    fun sortCurrency(sortType: Int) {
+        when (sortType) {
+            0 -> {
+                currencyList.sortedBy { it.id }
+            }
+
+            1 -> {
+                currencyList.sortedBy { it.currencyName }
+            }
+
+            2 -> {
+                currencyList.sortedBy { it.amount }
+            }
+        }
+        notifyItemRangeChanged(0, currencyList.size)
+    }
 }
