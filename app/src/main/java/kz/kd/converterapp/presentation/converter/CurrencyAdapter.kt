@@ -5,11 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kz.kd.converterapp.R
 import kz.kd.converterapp.domain.models.Currency
+import kz.kd.converterapp.presentation.utils.ClickListener
 
 class CurrencyAdapter(private val layoutInflater: LayoutInflater) :
     RecyclerView.Adapter<CurrencyViewHolder>() {
 
     private val currencyList = mutableListOf<Currency>()
+    var listener: ClickListener<Currency>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder {
         val itemView = layoutInflater.inflate(R.layout.item_currency, parent, false)
@@ -21,7 +23,12 @@ class CurrencyAdapter(private val layoutInflater: LayoutInflater) :
     }
 
     override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int) {
-        holder.bind(currencyList[position])
+        val currency = currencyList[position]
+        holder.bind(currency)
+        holder.itemView.setOnLongClickListener {
+            listener?.onClick(currency)
+            true
+        }
     }
 
     fun updateDataSet(newDataSet: List<Currency>) {

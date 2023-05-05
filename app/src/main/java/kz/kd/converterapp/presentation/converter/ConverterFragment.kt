@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import kz.kd.converterapp.R
 import kz.kd.converterapp.domain.models.Currency
+import kz.kd.converterapp.presentation.utils.ClickListener
 import kz.kd.converterapp.presentation.utils.SpaceItemDecoration
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -76,6 +77,9 @@ class ConverterFragment : Fragment() {
 
     private fun initAdapter() {
         currencyAdapter = CurrencyAdapter(layoutInflater = layoutInflater)
+        currencyAdapter.listener = ClickListener {
+
+        }
     }
 
     private fun initLayoutManager(context: Context) {
