@@ -9,9 +9,12 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.DOWN
@@ -31,6 +34,12 @@ class ConverterFragment : Fragment() {
 
     private val converterViewModel: ConverterViewModel by viewModel()
 
+    private lateinit var currentActivity: FragmentActivity
+    private lateinit var tbMain: Toolbar
+    private lateinit var tbDeleteView: View
+
+    private lateinit var btnAdd: Button
+
     private lateinit var rvConverter: RecyclerView
     private lateinit var currencyAdapter: CurrencyAdapter
     private lateinit var currencyLayoutManager: LinearLayoutManager
@@ -38,12 +47,18 @@ class ConverterFragment : Fragment() {
     private lateinit var currencySmoothScroller: LinearSmoothScroller
     private lateinit var currencyItemTouchHelperCallback: ItemTouchHelper.SimpleCallback
     private lateinit var currencyItemTouchHelper: ItemTouchHelper
-    private lateinit var btnAdd: Button
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        currentActivity = activity ?: return
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        tbDeleteView = layoutInflater.inflate(R.layout.toolbar_item_selected, container, true)
         return inflater.inflate(R.layout.fragment_converter, container, false)
     }
 
@@ -60,6 +75,8 @@ class ConverterFragment : Fragment() {
     }
 
     private fun initViews(view: View) {
+        tbMain = currentActivity.findViewById(R.id.tb_main)
+
         with(view) {
             rvConverter = findViewById(R.id.converter_rv)
             btnAdd = findViewById(R.id.fragment_converter_btn_add)
@@ -78,7 +95,13 @@ class ConverterFragment : Fragment() {
     private fun initAdapter() {
         currencyAdapter = CurrencyAdapter(layoutInflater = layoutInflater)
         currencyAdapter.listener = ClickListener {
+            replaceToolbar()
+        }
+    }
 
+    private fun replaceToolbar() {
+        tbMain.apply {
+            isGone = true
         }
     }
 
@@ -161,7 +184,7 @@ class ConverterFragment : Fragment() {
                     }
 
                     R.id.menu_reset -> {
-                        activity?.invalidateOptionsMenu()
+                        currentActivity.invalidateOptionsMenu()
                         currencyAdapter.sortCurrency(0)
                         true
                     }
