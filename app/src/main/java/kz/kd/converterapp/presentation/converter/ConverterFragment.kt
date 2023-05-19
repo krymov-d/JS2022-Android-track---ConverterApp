@@ -8,9 +8,10 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
+import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
@@ -32,13 +33,12 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ConverterFragment : Fragment() {
 
-    private val converterViewModel: ConverterViewModel by viewModel()
+    private val vmConverter: ConverterViewModel by viewModel()
 
     private lateinit var currentActivity: FragmentActivity
     private lateinit var tbMain: Toolbar
-    private lateinit var tbDeleteView: View
-
-    private lateinit var btnAdd: Button
+    private lateinit var tbItemSelected: Toolbar
+    private lateinit var onBackPressedCallback: OnBackPressedCallback
 
     private lateinit var rvConverter: RecyclerView
     private lateinit var currencyAdapter: CurrencyAdapter
@@ -48,38 +48,43 @@ class ConverterFragment : Fragment() {
     private lateinit var currencyItemTouchHelperCallback: ItemTouchHelper.SimpleCallback
     private lateinit var currencyItemTouchHelper: ItemTouchHelper
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        currentActivity = activity ?: return
-    }
+    private lateinit var btnAddCurrency: AppCompatButton
+    private lateinit var btnDeleteCurrency: AppCompatButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        tbDeleteView = layoutInflater.inflate(R.layout.toolbar_item_selected, container, true)
         return inflater.inflate(R.layout.fragment_converter, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        currentActivity = activity ?: return
+
+        initToolBar()
         initViews(view)
         initRecyclerProperties()
         initRecycler()
-        initBtnAddClickListener()
+        initClickListeners()
         initMenu()
 
         createContent()
     }
 
-    private fun initViews(view: View) {
-        tbMain = currentActivity.findViewById(R.id.tb_main)
+    private fun initToolBar() {
+        with(currentActivity) {
+            tbMain = findViewById(R.id.tb_main)
+            tbItemSelected = findViewById(R.id.tb_item_selected)
+            btnDeleteCurrency = findViewById(R.id.tb_item_selected_btn_delete)
+        }
+    }
 
+    private fun initViews(view: View) {
         with(view) {
             rvConverter = findViewById(R.id.converter_rv)
-            btnAdd = findViewById(R.id.fragment_converter_btn_add)
+            btnAddCurrency = findViewById(R.id.fragment_converter_btn_add)
         }
     }
 
@@ -94,15 +99,24 @@ class ConverterFragment : Fragment() {
 
     private fun initAdapter() {
         currencyAdapter = CurrencyAdapter(layoutInflater = layoutInflater)
-        currencyAdapter.listener = ClickListener {
-            replaceToolbar()
+        currencyAdapter.listener = ClickListener { pickedCurrency ->
+            substituteToolbar()
+            setupOnBackPressedCallback()
+            vmConverter.pickedCurrencyLiveData.value = pickedCurrency
         }
     }
 
-    private fun replaceToolbar() {
-        tbMain.apply {
-            isGone = true
-        }
+    private fun setupOnBackPressedCallback() {
+        onBackPressedCallback =
+            currentActivity.onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+                substituteToolbar()
+                isEnabled = !isEnabled
+            }
+    }
+
+    private fun substituteToolbar() {
+        tbMain.isGone = !tbMain.isGone
+        tbItemSelected.isGone = !tbItemSelected.isGone
     }
 
     private fun initLayoutManager(context: Context) {
@@ -147,8 +161,8 @@ class ConverterFragment : Fragment() {
         currencyItemTouchHelper.attachToRecyclerView(rvConverter)
     }
 
-    private fun initBtnAddClickListener() {
-        btnAdd.setOnClickListener {
+    private fun initClickListeners() {
+        btnAddCurrency.setOnClickListener {
             val item = Currency(
                 id = 99,
                 amount = 99999.99999,
@@ -161,11 +175,13 @@ class ConverterFragment : Fragment() {
             currencySmoothScroller.targetPosition = currencyAdapter.itemCount
             currencyLayoutManager.startSmoothScroll(currencySmoothScroller)
         }
+
+        btnDeleteCurrency.setOnClickListener {
+        }
     }
 
     private fun initMenu() {
-        val menuHost: MenuHost = requireActivity()
-        menuHost.addMenuProvider(object : MenuProvider {
+        currentActivity.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.menu_fragment_converter, menu)
             }
