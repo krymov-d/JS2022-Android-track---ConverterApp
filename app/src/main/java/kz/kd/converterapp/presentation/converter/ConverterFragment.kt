@@ -1,6 +1,5 @@
 package kz.kd.converterapp.presentation.converter
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -27,8 +26,11 @@ import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import kz.kd.converterapp.R
 import kz.kd.converterapp.domain.models.Currency
+import kz.kd.converterapp.presentation.converter.delete.CurrencyDeleteDialogFragment
 import kz.kd.converterapp.presentation.utils.ClickListener
+import kz.kd.converterapp.presentation.utils.ClickListenerWithNoParameters
 import kz.kd.converterapp.presentation.utils.SpaceItemDecoration
+import kz.kd.converterapp.presentation.utils.showSnackBarWithAction
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ConverterFragment : Fragment() {
@@ -50,6 +52,8 @@ class ConverterFragment : Fragment() {
 
     private lateinit var btnAddCurrency: AppCompatButton
     private lateinit var btnDeleteCurrency: AppCompatButton
+
+    private lateinit var currencyDeleteDialogFragment: CurrencyDeleteDialogFragment
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -89,9 +93,9 @@ class ConverterFragment : Fragment() {
     }
 
     private fun initRecyclerProperties() {
-        val currentContext = context ?: return
         initAdapter()
-        initLayoutManager(currentContext)
+        initItemLongClickListener()
+        initLayoutManager()
         initItemDecoration()
         initSmoothScroller()
         initItemTouchHelper()
@@ -99,19 +103,14 @@ class ConverterFragment : Fragment() {
 
     private fun initAdapter() {
         currencyAdapter = CurrencyAdapter(layoutInflater = layoutInflater)
-        currencyAdapter.listener = ClickListener { pickedCurrency ->
-            substituteToolbar()
-            setupOnBackPressedCallback()
-            vmConverter.pickedCurrencyLiveData.value = pickedCurrency
-        }
     }
 
-    private fun setupOnBackPressedCallback() {
-        onBackPressedCallback =
-            currentActivity.onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-                substituteToolbar()
-                isEnabled = !isEnabled
-            }
+    private fun initItemLongClickListener() {
+        currencyAdapter.listener = ClickListener { selectedCurrency ->
+            substituteToolbar()
+            setupOnBackPressedCallback()
+            vmConverter.selectedCurrencyLiveData.value = selectedCurrency
+        }
     }
 
     private fun substituteToolbar() {
@@ -119,8 +118,16 @@ class ConverterFragment : Fragment() {
         tbItemSelected.isGone = !tbItemSelected.isGone
     }
 
-    private fun initLayoutManager(context: Context) {
-        currencyLayoutManager = LinearLayoutManager(context)
+    private fun setupOnBackPressedCallback() {
+        onBackPressedCallback =
+            currentActivity.onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+                substituteToolbar()
+                remove()
+            }
+    }
+
+    private fun initLayoutManager() {
+        currencyLayoutManager = LinearLayoutManager(currentActivity)
     }
 
     private fun initItemDecoration() {
@@ -149,6 +156,7 @@ class ConverterFragment : Fragment() {
                     currencyAdapter.deleteCurrency(viewHolder.layoutPosition)
                 }
             }
+
         currencyItemTouchHelper = ItemTouchHelper(currencyItemTouchHelperCallback)
     }
 
@@ -177,6 +185,30 @@ class ConverterFragment : Fragment() {
         }
 
         btnDeleteCurrency.setOnClickListener {
+            substituteToolbar()
+            onBackPressedCallback.remove()
+            initCurrencyDeleteDialogFragment()
+        }
+    }
+
+    private fun initCurrencyDeleteDialogFragment() {
+        currencyDeleteDialogFragment = CurrencyDeleteDialogFragment()
+
+        currencyDeleteDialogFragment.listener = ClickListenerWithNoParameters {
+            vmConverter.deleteCurrency()
+            showRecoverSnackBar()
+        }
+
+        currencyDeleteDialogFragment.show(parentFragmentManager, null)
+    }
+
+    private fun showRecoverSnackBar() {
+        currentActivity.showSnackBarWithAction(
+            btnDeleteCurrency,
+            R.string.deleted,
+            R.string.recover
+        ) {
+            vmConverter.recoverCurrency()
         }
     }
 

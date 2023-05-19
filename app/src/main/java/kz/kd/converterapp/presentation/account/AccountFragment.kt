@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import kz.kd.converterapp.R
-import kz.kd.converterapp.startCamera
-import kz.kd.converterapp.startEmail
-import kz.kd.converterapp.startPhoneCall
-import kz.kd.converterapp.startWebsite
+import kz.kd.converterapp.presentation.utils.startCamera
+import kz.kd.converterapp.presentation.utils.startEmail
+import kz.kd.converterapp.presentation.utils.startPhoneCall
+import kz.kd.converterapp.presentation.utils.startWebsite
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AccountFragment : Fragment() {

@@ -1,18 +1,30 @@
-package kz.kd.converterapp
+package kz.kd.converterapp.presentation.utils
 
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.MediaStore
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
-
-fun Context.showToast(msg: String, length: Int = Toast.LENGTH_SHORT) {
-    Toast.makeText(this, msg, length).show()
-}
+import com.google.android.material.snackbar.Snackbar
+import kz.kd.converterapp.R
 
 fun Context.showToast(@StringRes resId: Int, length: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, resId, length).show()
+}
+
+fun Context.showSnackBarWithAction(
+    view: View,
+    @StringRes messageStringId: Int,
+    @StringRes actionStringId: Int,
+    listener: View.OnClickListener
+) {
+    Snackbar
+        .make(view, messageStringId, Snackbar.LENGTH_LONG)
+        .setAction(actionStringId, listener)
+        .setActionTextColor(resources.getColor(R.color.main_01, null))
+        .show()
 }
 
 fun Context.startEmail(email: String) {

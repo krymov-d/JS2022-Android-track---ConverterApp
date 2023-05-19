@@ -6,6 +6,14 @@ import kz.kd.converterapp.domain.models.Currency
 
 class ConverterViewModel : ViewModel() {
 
-    val pickedCurrencyLiveData: MutableLiveData<Currency> = MutableLiveData()
+    val selectedCurrencyLiveData: MutableLiveData<Currency> = MutableLiveData()
+
+    fun deleteCurrency() {
+
+    }
+
+    fun recoverCurrency() {
+
+    }
 
 }

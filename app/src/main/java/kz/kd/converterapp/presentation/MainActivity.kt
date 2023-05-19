@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kz.kd.converterapp.CORRECT_PIN_CODE
 import kz.kd.converterapp.R
-import kz.kd.converterapp.showToast
+import kz.kd.converterapp.presentation.utils.showToast
 
 private const val KEY_PIN_CODE = "PinCode"
 
