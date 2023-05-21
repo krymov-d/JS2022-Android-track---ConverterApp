@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import kz.kd.converterapp.R
 import kz.kd.converterapp.domain.models.Currency
+import kz.kd.converterapp.presentation.converter.add.CurrencyAddBottomSheet
 import kz.kd.converterapp.presentation.converter.delete.CurrencyDeleteDialogFragment
 import kz.kd.converterapp.presentation.utils.ClickListener
 import kz.kd.converterapp.presentation.utils.ClickListenerWithNoParameters
@@ -171,17 +172,18 @@ class ConverterFragment : Fragment() {
 
     private fun initClickListeners() {
         btnAddCurrency.setOnClickListener {
-            val item = Currency(
-                id = 99,
-                amount = 99999.99999,
-                countryFlag = R.drawable.ic_anakin_skywalker,
-                countryName = "Kazakhstan",
-                currencyName = "KZT"
-            )
-
-            currencyAdapter.addCurrency(item)
-            currencySmoothScroller.targetPosition = currencyAdapter.itemCount
-            currencyLayoutManager.startSmoothScroll(currencySmoothScroller)
+//            val item = Currency(
+//                id = 99,
+//                amount = 99999.99999,
+//                countryFlag = R.drawable.ic_anakin_skywalker,
+//                countryName = "Kazakhstan",
+//                currencyName = "KZT"
+//            )
+//
+//            currencyAdapter.addCurrency(item)
+//            currencySmoothScroller.targetPosition = currencyAdapter.itemCount
+//            currencyLayoutManager.startSmoothScroll(currencySmoothScroller)
+            CurrencyAddBottomSheet().show(parentFragmentManager, null)
         }
 
         btnDeleteCurrency.setOnClickListener {

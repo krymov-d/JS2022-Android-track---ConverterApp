@@ -73,4 +73,16 @@
         <item name="fontFamily">@font/montserrat</item>
     </style>
 
+    <style name="style_bs_currency_add_btn">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/btn_bg_blue</item>
+        <item name="android:backgroundTint">@null</item>
+        <item name="android:paddingHorizontal">16dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/main_02</item>
+        <item name="android:textSize">22sp</item>
+        <item name="fontFamily">@font/montserrat_light</item>
+    </style>
+
 </resources>
