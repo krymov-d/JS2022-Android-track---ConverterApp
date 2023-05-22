@@ -50,4 +50,7 @@
     
     <string name="currency_amount">Количество тенге в валюте</string>
     <string name="select_currency">Выбрать валюту</string>
+    
+    <string name="transaction_quantity_w_column">Количество конвертаций:</string>
+    <string name="total_time_w_column">Проведенное время:</string>
 </resources>
