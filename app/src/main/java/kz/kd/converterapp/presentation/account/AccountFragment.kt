@@ -4,23 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
 import kz.kd.converterapp.R
-import kz.kd.converterapp.presentation.utils.startCamera
-import kz.kd.converterapp.presentation.utils.startEmail
-import kz.kd.converterapp.presentation.utils.startPhoneCall
-import kz.kd.converterapp.presentation.utils.startWebsite
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AccountFragment : Fragment() {
 
     private val accountViewModel: AccountViewModel by viewModel()
 
-    private lateinit var btnShare: Button
-    private lateinit var btnSend: Button
-    private lateinit var btnCall: Button
-    private lateinit var btnCamera: Button
+    private lateinit var accountTabLayout: TabLayout
+    private lateinit var accountViewPager2: ViewPager2
+    private lateinit var accountAdapter: AccountAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,35 +29,19 @@ class AccountFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initViews(view)
-        initImplicitIntents()
+        initViewPager()
     }
 
     private fun initViews(view: View) {
         with(view) {
-            btnShare = findViewById(R.id.profile_btn_share)
-            btnSend = findViewById(R.id.profile_btn_send)
-            btnCall = findViewById(R.id.profile_btn_call)
-            btnCamera = findViewById(R.id.profile_btn_camera)
+            accountTabLayout = findViewById(R.id.account_tab_layout)
+            accountViewPager2 = findViewById(R.id.account_view_pager)
         }
     }
 
-    private fun initImplicitIntents() {
-        val currentContext = context ?: return
-
-        btnShare.setOnClickListener {
-            currentContext.startWebsite("starwars.fandom.com/wiki/Anakin_Skywalker")
-        }
-
-        btnSend.setOnClickListener {
-            currentContext.startEmail("darthvader@emprire.sw")
-        }
-
-        btnCall.setOnClickListener {
-            currentContext.startPhoneCall("+7-777-777-77-77")
-        }
-
-        btnCamera.setOnClickListener {
-            currentContext.startCamera()
-        }
+    private fun initViewPager() {
+        accountAdapter = AccountAdapter(this)
+        accountViewPager2.adapter = accountAdapter
     }
+
 }
